@@ -87,72 +87,64 @@ var specialCharacters = [
   "/",
 ];
 
-// // Write password to the #password input
 function writePassword() {
-  // var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  console.log("test");
-  // passwordText.value = password;
+  var info = gather();
+  var listFinal = createList(info);
+  var numberOfCharacters = info[0];
+  var password = '';
+  for(count = 0; count < numberOfCharacters; count++)
+  {
+      var randomInt = Math.floor(Math.random() * listFinal.length);
+      password += listFinal[randomInt];
+  }
+  passwordText.value = password;
 
 }
-
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 
+function gather() {
+  var final = [];
 
+  
+  var correctResponse = false;
+  while(correctResponse == false) {
 
-// function gather() {
-//   var final = [];
+    var a = prompt("please provide how many characters you want in the password (must be greator than 8 characters and less than 128 characters");
+    if(a >= 8 && a <= 128)
+    {
+      correctResponse = true;
+    } else {
+      correctResponse = false;
+    }
+  }
 
+  var b = confirm("Do you want uppercase");
+  var c = confirm("Do you want lowercase");
+  var d = confirm("Do you want numbers");
+  var e = confirm("Do you want special");
+  final.push(a);
+  final.push(b);
+  final.push(c);
+  final.push(d);
+  final.push(e);
+  return final;
+}
 
-//   var a = prompt("please provide how many characters you want in the password");
-
-
-//   var b = confirm("Do you want uppercase");
-//   var c = confirm("Do you want lowercase");
-//   var d = confirm("Do you want numbers");
-//   var e = confirm("Do you want special");
-//   final.push(a);
-//   final.push(b);
-//   final.push(c);
-//   final.push(d);
-//   final.push(e);
-//   return final;
-// }
-
-// var info = gather();
-
-// console.log(info);
-
-// function createList(infoArray) {
-//   var finalList = [];
-//   if (infoArray[1] == true) {
-//     finalList = finalList.concat(uppercase);
-//   }
-//   if (infoArray[2] == true) {
-//     finalList = finalList.concat(lowercase);
-//   }
-//   if (infoArray[3] == true) {
-//     finalList = finalList.concat(numbers);
-//   }
-//   if (infoArray[4] == true) {
-//     finalList = finalList.concat(specialCharacters);
-//   }
-//   return finalList;
-// }
-
-// var listFinal = createList(info);
-
-// var numberOfCharacters = info[0];
-
-// var password = '';
-// for(count = 0; count < numberOfCharacters; count++)
-// {
-//     var randomInt = Math.floor(Math.random() * listFinal.length);
-//     password += listFinal[randomInt];
-// }
-
-// console.log(password);
-
-
+function createList(infoArray) {
+  var finalList = [];
+  if (infoArray[1] == true) {
+    finalList = finalList.concat(uppercase);
+  }
+  if (infoArray[2] == true) {
+    finalList = finalList.concat(lowercase);
+  }
+  if (infoArray[3] == true) {
+    finalList = finalList.concat(numbers);
+  }
+  if (infoArray[4] == true) {
+    finalList = finalList.concat(specialCharacters);
+  }
+  return finalList;
+}
